@@ -1,7 +1,5 @@
 ## [All Project Roadmap](https://github.com/orgs/cdirs/projects/1)
 
----
-
 ## Refundable
 
 - [Repositories](https://github.com/orgs/cdirs/repositories?q=refundable&type=all&language=&sort=)
