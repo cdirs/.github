@@ -10,4 +10,4 @@
 
 ## Refundable Card Loyalty
 
-- [Repositories](https://github.com/search?q=topic%3Arefundable-card-loyalty+org%3Acdirs+fork%3Atrue)
+- [Repositories](https://github.com/orgs/cdirs/repositories?q=refundable-card-loyalty&type=all&language=&sort=)
