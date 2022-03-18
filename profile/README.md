@@ -7,8 +7,8 @@
 
 ## igi Fund Manager
 
-- [Repositories](https://github.com/orgs/cdirs/teams/refundable-card-loyalty/repositories)
-- [Discussions](https://github.com/orgs/cdirs/teams/refundable-card-loyalty/discussions)
+- [Repositories](https://github.com/orgs/cdirs/teams/igi-fund-manager/repositories)
+- [Discussions](https://github.com/orgs/cdirs/teams/igi-fund-manager/discussions)
 
 ## Chief Support Systems
 
