@@ -11,6 +11,7 @@ env:
   VERSION_FLAG: ${{ github.event_name == 'pull_request' && github.base_ref == 'main' && '--releaseAs=prerelease --preid=rc' || github.ref_name == 'main' && '' || github.ref_name == 'staging' && '--releaseAs=prerelease --preid=beta' || '--releaseAs=prerelease --preid=alpha' }}
   NPM_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
   GITHUB_TOKEN: ${{ secrets.GIT_TOKEN }}
+  REF_NAME_TEST: ${{ github.ref_name }}
 
 jobs:
   build-test-publish-deploy:
