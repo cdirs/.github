@@ -13,7 +13,7 @@ assignees: ''
 
 ## Possible Solution
 
-## Steps to Reproduce (for bugs)
+## Steps to Reproduce
 1.
 2.
 3.
