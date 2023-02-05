@@ -1,14 +1,19 @@
 ---
-name: Feature request
+name: Feature request with Subtasks
 about: Suggest an idea for this project
 title: ''
-labels: 'feature'
+labels: 'feature,with-subtasks'
 assignees: ''
 
 ---
 
 ## Expected Behavior
 
+
+## Subtasks
+```[tasklist]
+### Subtasks
+```
 
 ## Checklists
 ```[tasklist]
