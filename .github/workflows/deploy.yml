@@ -52,7 +52,5 @@ jobs:
         run: npx nx affected --target=e2e --parallel=3
       - name: Build changed libraries and apps
         run: npx nx affected --target=build --parallel=3 --configuration=${{ github.ref_name == 'main' && 'production' || 'development' }}
-      - name: Deploy changed libraries and apps
-        run: npx nx affected --target=deploy --parallel=3 --configuration=${{ github.ref_name == 'main' && 'production' || 'development' }}
       - name: Publish changed libraries and apps
         run: npx nx affected --target=publish --parallel=3 --configuration=${{ github.ref_name == 'main' && 'production' || 'development' }}
