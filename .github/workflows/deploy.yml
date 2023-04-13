@@ -54,3 +54,5 @@ jobs:
         run: npx nx affected --target=build --parallel=3 --configuration=${{ github.ref_name == 'main' && 'production' || 'development' }}
       - name: Publish changed libraries and apps
         run: npx nx affected --target=publish --parallel=3 --configuration=${{ github.ref_name == 'main' && 'production' || 'development' }}
+      - name: Submit changed libraries and apps
+        run: npx nx affected --target=submit --parallel=3 --configuration=${{ github.ref_name == 'main' && 'production' || 'development' }}
