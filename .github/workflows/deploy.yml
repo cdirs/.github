@@ -128,13 +128,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout appropriate version
-        uses: actions/cache/restore@v3
+        uses: actions/checkout@v3
         with:
           ref: ${{ github.event_name == 'pull_request' && github.event.pull_request.head.ref || '' }}
           fetch-depth: 0
       - name: Cache node modules
         id: cache-npm
-        uses: actions/cache@v3
+        uses: actions/cache/restore@v3
         env:
           cache-name: cache-node-modules
         with:
@@ -160,13 +160,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout appropriate version
-        uses: actions/cache/restore@v3
+        uses: actions/checkout@v3
         with:
           ref: ${{ github.event_name == 'pull_request' && github.event.pull_request.head.ref || '' }}
           fetch-depth: 0
       - name: Cache node modules
         id: cache-npm
-        uses: actions/cache@v3
+        uses: actions/cache/restore@v3
         env:
           cache-name: cache-node-modules
         with:
