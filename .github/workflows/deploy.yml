@@ -90,23 +90,18 @@ jobs:
         run: yarn install --frozen-lockfile
       - name: Cache NX Lint
         id: cache-nx-lint
-        uses: actions/cache/restore@v3
+        uses: actions/cache@v3
         env:
-          cache-name: cache-nx-linst
+          cache-name: cache-nx-lint
         with:
           path: node_modules/.cache/nx
-          key: ${{ runner.os }}-cache-nx-lint
+          key: ${{ runner.os }}-cache-nx-lint-${{ github.sha }}
+          restore-keys: |
+            ${{ runner.os }}-cache-nx-lint-
       - name: Derive appropriate SHAs `nx affected` commands
         uses: nrwl/nx-set-shas@v3
       - name: Lint changed libraries and apps
         run: npx nx affected --target=lint --parallel=3
-      - name: Save Cache NX Lint
-        uses: actions/cache/save@v3
-        env:
-          cache-name: cache-nx-linst
-        with:
-          path: node_modules/.cache/nx
-          key: ${{ runner.os }}-cache-nx-lint
   test:
     needs: install-deps
     runs-on: ubuntu-latest
@@ -136,23 +131,18 @@ jobs:
         run: yarn install --frozen-lockfile
       - name: Cache NX Tests
         id: cache-nx-tests
-        uses: actions/cache/restore@v3
+        uses: actions/cache@v3
         env:
           cache-name: cache-nx-tests
         with:
           path: node_modules/.cache/nx
-          key: ${{ runner.os }}-cache-nx-tests
+          key: ${{ runner.os }}-cache-nx-tests-${{ github.sha }}
+          restore-keys: |
+            ${{ runner.os }}-cache-nx-tests-
       - name: Derive appropriate SHAs `nx affected` commands
         uses: nrwl/nx-set-shas@v3
       - name: Test changed libraries and apps
         run: npx nx affected --target=test --parallel=3
-      - name: SaveCache NX Tests
-        uses: actions/cache/save@v3
-        env:
-          cache-name: cache-nx-tests
-        with:
-          path: node_modules/.cache/nx
-          key: ${{ runner.os }}-cache-nx-tests
   e2e-test:
     needs: install-deps
     runs-on: ubuntu-latest
@@ -182,23 +172,18 @@ jobs:
         run: yarn install --frozen-lockfile
       - name: Cache NX E2E
         id: cache-nx-e2e
-        uses: actions/cache/restore@v3
+        uses: actions/cache@v3
         env:
           cache-name: cache-nx-e2e
         with:
           path: node_modules/.cache/nx
-          key: ${{ runner.os }}-cache-nx-e2e
+          key: ${{ runner.os }}-cache-nx-e2e-${{ github.sha }}
+          restore-keys: |
+            ${{ runner.os }}-cache-nx-e2e-
       - name: Derive appropriate SHAs `nx affected` commands
         uses: nrwl/nx-set-shas@v3
       - name: E2E test changed libraries and apps
         run: npx nx affected --target=e2e --parallel=3
-      - name: Save Cache NX E2E
-        uses: actions/cache/save@v3
-        env:
-          cache-name: cache-nx-e2e
-        with:
-          path: node_modules/.cache/nx
-          key: ${{ runner.os }}-cache-nx-e2e
 
   build:
     needs: install-deps
@@ -229,25 +214,20 @@ jobs:
         run: yarn install --frozen-lockfile
       - name: Cache NX Builds
         id: cache-nx-builds
-        uses: actions/cache/restore@v3
+        uses: actions/cache@v3
         env:
           cache-name: cache-nx-builds
         with:
           path: node_modules/.cache/nx
-          key: ${{ runner.os }}-cache-nx-builds
+          key: ${{ runner.os }}-cache-nx-builds-${{ github.sha }}
+          restore-keys: |
+            ${{ runner.os }}-cache-nx-builds-
       - name: Derive appropriate SHAs `nx affected` commands
         uses: nrwl/nx-set-shas@v3
       - name: Build changed libraries and apps
         run: npx nx affected --target=build --parallel=3 --configuration=${{ github.ref_name == 'main' && 'production' || 'development' }}
       - name: Publish changed libraries and apps
         run: npx nx affected --target=publish --parallel=3 --configuration=${{ github.ref_name == 'main' && 'production' || 'development' }}
-      - name: Save Cache NX Builds
-        uses: actions/cache/save@v3
-        env:
-          cache-name: cache-nx-builds
-        with:
-          path: node_modules/.cache/nx
-          key: ${{ runner.os }}-cache-nx-builds
 
   publish:
     needs: 
