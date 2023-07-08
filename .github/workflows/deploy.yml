@@ -48,7 +48,9 @@ jobs:
             ${{ runner.os }}-
       - name: Setup Node
         uses: actions/setup-node@v3
-      - name: Install yarn dependencies
+      - if: ${{ steps.cache-npm.outputs.cache-hit != 'true' }}
+        name: Backup Yarn install
+        continue-on-error: true
         run: yarn install --frozen-lockfile
       - name: Set NPM auth token for publishing requirements
         run: npm config set //${{ secrets.REGISTRY || 'registry.npmjs.org' }}/:_authToken=${{ env.NPM_AUTH_TOKEN }}
