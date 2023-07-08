@@ -46,11 +46,8 @@ jobs:
             ${{ runner.os }}-build-${{ env.cache-name }}-
             ${{ runner.os }}-build-
             ${{ runner.os }}-
-      - name: Setup Node with yarn cache
+      - name: Setup Node
         uses: actions/setup-node@v3
-        with:
-          node-version: "16"
-          cache: "yarn"
       - name: Install yarn dependencies
         run: yarn install --frozen-lockfile
       - name: Set NPM auth token for publishing requirements
@@ -85,6 +82,10 @@ jobs:
             ${{ runner.os }}-build-${{ env.cache-name }}-
             ${{ runner.os }}-build-
             ${{ runner.os }}-
+      - if: ${{ steps.cache-npm.outputs.cache-hit != 'true' }}
+        name: Backup Yarn install
+        continue-on-error: true
+        run: yarn install --frozen-lockfile
       - name: Derive appropriate SHAs `nx affected` commands
         uses: nrwl/nx-set-shas@v3
       - name: Lint changed libraries and apps
@@ -112,6 +113,10 @@ jobs:
             ${{ runner.os }}-build-${{ env.cache-name }}-
             ${{ runner.os }}-build-
             ${{ runner.os }}-
+      - if: ${{ steps.cache-npm.outputs.cache-hit != 'true' }}
+        name: Backup Yarn install
+        continue-on-error: true
+        run: yarn install --frozen-lockfile
       - name: Derive appropriate SHAs `nx affected` commands
         uses: nrwl/nx-set-shas@v3
       - name: Test changed libraries and apps
@@ -139,6 +144,10 @@ jobs:
             ${{ runner.os }}-build-${{ env.cache-name }}-
             ${{ runner.os }}-build-
             ${{ runner.os }}-
+      - if: ${{ steps.cache-npm.outputs.cache-hit != 'true' }}
+        name: Backup Yarn install
+        continue-on-error: true
+        run: yarn install --frozen-lockfile
       - name: Derive appropriate SHAs `nx affected` commands
         uses: nrwl/nx-set-shas@v3
       - name: E2E test changed libraries and apps
@@ -167,6 +176,10 @@ jobs:
             ${{ runner.os }}-build-${{ env.cache-name }}-
             ${{ runner.os }}-build-
             ${{ runner.os }}-
+      - if: ${{ steps.cache-npm.outputs.cache-hit != 'true' }}
+        name: Backup Yarn install
+        continue-on-error: true
+        run: yarn install --frozen-lockfile
       - name: Derive appropriate SHAs `nx affected` commands
         uses: nrwl/nx-set-shas@v3
       - name: Build changed libraries and apps
@@ -201,6 +214,10 @@ jobs:
             ${{ runner.os }}-build-${{ env.cache-name }}-
             ${{ runner.os }}-build-
             ${{ runner.os }}-
+      - if: ${{ steps.cache-npm.outputs.cache-hit != 'true' }}
+        name: Backup Yarn install
+        continue-on-error: true
+        run: yarn install --frozen-lockfile
       - name: Derive appropriate SHAs `nx affected` commands
         uses: nrwl/nx-set-shas@v3
       - name: Publish changed libraries and apps
@@ -234,6 +251,10 @@ jobs:
             ${{ runner.os }}-build-${{ env.cache-name }}-
             ${{ runner.os }}-build-
             ${{ runner.os }}-
+      - if: ${{ steps.cache-npm.outputs.cache-hit != 'true' }}
+        name: Backup Yarn install
+        continue-on-error: true
+        run: yarn install --frozen-lockfile
       - name: Derive appropriate SHAs `nx affected` commands
         uses: nrwl/nx-set-shas@v3
       - name: Submit changed libraries and apps
