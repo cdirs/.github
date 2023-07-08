@@ -20,7 +20,7 @@ env:
   TEST_CHECK: ${{ github.ref_name == 'main' && '--skipProjectChangelog' || 'another' }}
 
 jobs:
-  bump-version:
+  install-deps:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout appropriate version
