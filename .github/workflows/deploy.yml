@@ -88,6 +88,14 @@ jobs:
         name: Backup Yarn install
         continue-on-error: true
         run: yarn install --frozen-lockfile
+      - name: Cache NX Lint
+        id: cache-nx-lint
+        uses: actions/cache@v3
+        env:
+          cache-name: cache-nx-linst
+        with:
+          path: node_modules/.cache/nx
+          key: ${{ runner.os }}-cache-nx-lint
       - name: Derive appropriate SHAs `nx affected` commands
         uses: nrwl/nx-set-shas@v3
       - name: Lint changed libraries and apps
@@ -119,6 +127,14 @@ jobs:
         name: Backup Yarn install
         continue-on-error: true
         run: yarn install --frozen-lockfile
+      - name: Cache NX Tests
+        id: cache-nx-tests
+        uses: actions/cache@v3
+        env:
+          cache-name: cache-nx-tests
+        with:
+          path: node_modules/.cache/nx
+          key: ${{ runner.os }}-cache-nx-tests
       - name: Derive appropriate SHAs `nx affected` commands
         uses: nrwl/nx-set-shas@v3
       - name: Test changed libraries and apps
@@ -150,6 +166,14 @@ jobs:
         name: Backup Yarn install
         continue-on-error: true
         run: yarn install --frozen-lockfile
+      - name: Cache NX E2E
+        id: cache-nx-e2e
+        uses: actions/cache@v3
+        env:
+          cache-name: cache-nx-e2e
+        with:
+          path: node_modules/.cache/nx
+          key: ${{ runner.os }}-cache-nx-e2e
       - name: Derive appropriate SHAs `nx affected` commands
         uses: nrwl/nx-set-shas@v3
       - name: E2E test changed libraries and apps
@@ -182,6 +206,14 @@ jobs:
         name: Backup Yarn install
         continue-on-error: true
         run: yarn install --frozen-lockfile
+      - name: Cache NX Builds
+        id: cache-nx-builds
+        uses: actions/cache@v3
+        env:
+          cache-name: cache-nx-builds
+        with:
+          path: node_modules/.cache/nx
+          key: ${{ runner.os }}-cache-nx-builds
       - name: Derive appropriate SHAs `nx affected` commands
         uses: nrwl/nx-set-shas@v3
       - name: Build changed libraries and apps
