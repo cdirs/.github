@@ -46,38 +46,28 @@ jobs:
       - name: Push tags, version and changelog back to git
         run: git push --follow-tags
 
-
-  install-deps:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout appropriate version
-        uses: actions/checkout@v3
-      - name: Setup Node with yarn cache
-        uses: actions/setup-node@v3
-        with:
-          node-version: "16"
-          cache: "yarn"
-      - name: Install yarn dependencies
-        run: yarn install --frozen-lockfile
-      - name: Derive appropriate SHAs `nx affected` commands
-        uses: nrwl/nx-set-shas@v3
-
   lint:
     needs: install-deps
     runs-on: ubuntu-latest
     steps:
+      - name: Derive appropriate SHAs `nx affected` commands
+        uses: nrwl/nx-set-shas@v3
       - name: Lint changed libraries and apps
         run: npx nx affected --target=lint --parallel=3
   test:
     needs: install-deps
     runs-on: ubuntu-latest
     steps:
+      - name: Derive appropriate SHAs `nx affected` commands
+        uses: nrwl/nx-set-shas@v3
       - name: Test changed libraries and apps
         run: npx nx affected --target=test --parallel=3
   e2e-test:
     needs: install-deps
     runs-on: ubuntu-latest
     steps:
+      - name: Derive appropriate SHAs `nx affected` commands
+        uses: nrwl/nx-set-shas@v3
       - name: E2E test changed libraries and apps
         run: npx nx affected --target=e2e --parallel=3
 
@@ -85,6 +75,8 @@ jobs:
     needs: install-deps
     runs-on: ubuntu-latest
     steps:
+      - name: Derive appropriate SHAs `nx affected` commands
+        uses: nrwl/nx-set-shas@v3
       - name: Build changed libraries and apps
         run: npx nx affected --target=build --parallel=3 --configuration=${{ github.ref_name == 'main' && 'production' || 'development' }}
       - name: Publish changed libraries and apps
@@ -98,6 +90,8 @@ jobs:
       - build
     runs-on: ubuntu-latest
     steps:
+      - name: Derive appropriate SHAs `nx affected` commands
+        uses: nrwl/nx-set-shas@v3
       - name: Publish changed libraries and apps
         run: npx nx affected --target=publish --parallel=3 --configuration=${{ github.ref_name == 'main' && 'production' || 'development' }}
 
@@ -110,5 +104,7 @@ jobs:
       - build
     if: github.ref_name == 'main'
     steps:
+      - name: Derive appropriate SHAs `nx affected` commands
+        uses: nrwl/nx-set-shas@v3
       - name: Submit changed libraries and apps
         run: npx nx affected --target=submit --parallel=3 --configuration=${{ github.ref_name == 'main' && 'production' || 'development' }}
