@@ -68,6 +68,9 @@ jobs:
     steps:
       - name: Checkout appropriate version
         uses: actions/checkout@v3
+        with:
+          ref: ${{ github.event_name == 'pull_request' && github.event.pull_request.head.ref || '' }}
+          fetch-depth: 0
       - name: Cache node modules
         id: cache-npm
         uses: actions/cache@v3
@@ -92,6 +95,9 @@ jobs:
     steps:
       - name: Checkout appropriate version
         uses: actions/checkout@v3
+        with:
+          ref: ${{ github.event_name == 'pull_request' && github.event.pull_request.head.ref || '' }}
+          fetch-depth: 0
       - name: Cache node modules
         id: cache-npm
         uses: actions/cache@v3
@@ -116,6 +122,9 @@ jobs:
     steps:
       - name: Checkout appropriate version
         uses: actions/checkout@v3
+        with:
+          ref: ${{ github.event_name == 'pull_request' && github.event.pull_request.head.ref || '' }}
+          fetch-depth: 0
       - name: Cache node modules
         id: cache-npm
         uses: actions/cache@v3
@@ -141,6 +150,9 @@ jobs:
     steps:
       - name: Checkout appropriate version
         uses: actions/checkout@v3
+        with:
+          ref: ${{ github.event_name == 'pull_request' && github.event.pull_request.head.ref || '' }}
+          fetch-depth: 0
       - name: Cache node modules
         id: cache-npm
         uses: actions/cache@v3
@@ -172,6 +184,9 @@ jobs:
     steps:
       - name: Checkout appropriate version
         uses: actions/checkout@v3
+        with:
+          ref: ${{ github.event_name == 'pull_request' && github.event.pull_request.head.ref || '' }}
+          fetch-depth: 0
       - name: Cache node modules
         id: cache-npm
         uses: actions/cache@v3
@@ -202,6 +217,9 @@ jobs:
     steps:
       - name: Checkout appropriate version
         uses: actions/checkout@v3
+        with:
+          ref: ${{ github.event_name == 'pull_request' && github.event.pull_request.head.ref || '' }}
+          fetch-depth: 0
       - name: Cache node modules
         id: cache-npm
         uses: actions/cache@v3
