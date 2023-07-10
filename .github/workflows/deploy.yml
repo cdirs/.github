@@ -98,10 +98,8 @@ jobs:
           key: ${{ runner.os }}-cache-nx-lint-${{ github.sha }}
           restore-keys: |
             ${{ runner.os }}-cache-nx-lint-
-      - name: Derive appropriate SHAs `nx affected` commands
-        uses: nrwl/nx-set-shas@v3
       - name: Lint changed libraries and apps
-        run: npx nx affected --target=lint --parallel=3
+        run: npx nx run-many --all --target=lint --parallel=3
   test:
     needs: install-deps
     runs-on: ubuntu-latest
@@ -139,10 +137,8 @@ jobs:
           key: ${{ runner.os }}-cache-nx-tests-${{ github.sha }}
           restore-keys: |
             ${{ runner.os }}-cache-nx-tests-
-      - name: Derive appropriate SHAs `nx affected` commands
-        uses: nrwl/nx-set-shas@v3
       - name: Test changed libraries and apps
-        run: npx nx affected --target=test --parallel=3
+        run: npx nx run-many --all --target=test --parallel=3
   e2e-test:
     needs: install-deps
     runs-on: ubuntu-latest
@@ -180,10 +176,8 @@ jobs:
           key: ${{ runner.os }}-cache-nx-e2e-${{ github.sha }}
           restore-keys: |
             ${{ runner.os }}-cache-nx-e2e-
-      - name: Derive appropriate SHAs `nx affected` commands
-        uses: nrwl/nx-set-shas@v3
       - name: E2E test changed libraries and apps
-        run: npx nx affected --target=e2e --parallel=3
+        run: npx nx run-many --all --target=e2e --parallel=3
 
   build:
     needs: install-deps
@@ -222,12 +216,8 @@ jobs:
           key: ${{ runner.os }}-cache-nx-builds-${{ github.sha }}
           restore-keys: |
             ${{ runner.os }}-cache-nx-builds-
-      - name: Derive appropriate SHAs `nx affected` commands
-        uses: nrwl/nx-set-shas@v3
       - name: Build changed libraries and apps
-        run: npx nx affected --target=build --parallel=3 --configuration=${{ github.ref_name == 'main' && 'production' || 'development' }}
-      - name: Publish changed libraries and apps
-        run: npx nx affected --target=publish --parallel=3 --configuration=${{ github.ref_name == 'main' && 'production' || 'development' }}
+        run: npx nx run-many --all --target=build --parallel=3 --configuration=${{ github.ref_name == 'main' && 'production' || 'development' }}
 
   publish:
     needs: 
