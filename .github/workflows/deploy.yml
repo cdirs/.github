@@ -41,16 +41,14 @@ jobs:
           path: | 
             ~/.npm
             node_modules
-          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
+          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/yarn.lock') }}
           restore-keys: |
             ${{ runner.os }}-build-${{ env.cache-name }}-
             ${{ runner.os }}-build-
             ${{ runner.os }}-
       - name: Setup Node
         uses: actions/setup-node@v3
-      - if: ${{ steps.cache-npm.outputs.cache-hit != 'true' }}
-        name: Backup Yarn install
-        continue-on-error: true
+      - name: Backup Yarn install
         run: yarn install --frozen-lockfile
       - name: Set NPM auth token for publishing requirements
         run: npm config set //${{ secrets.REGISTRY || 'registry.npmjs.org' }}/:_authToken=${{ env.NPM_AUTH_TOKEN }}
