@@ -48,6 +48,8 @@ jobs:
             ${{ runner.os }}-
       - name: Setup Node
         uses: actions/setup-node@v3
+        with:
+          node-version: '16.x'
       - name: Backup Yarn install
         run: yarn install --frozen-lockfile
       - name: Set NPM auth token for publishing requirements
